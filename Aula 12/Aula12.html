@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="vue.min.js"></script>
+    <script type="text/javascript" src="axios.min.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <header>
+            <img src="topo.jpg" alt="Logotipo" class="image-fluid"/>
+        </header>
+        <main>
+            <h1>Cadastro de Livro</h1>
+            <div class="row">
+                <div class="col-md-4">        
+                       <input type="text" class="form-control mb-3"  placeholder="Titulo" v-model="titulo">
+                       <input type="text" class="form-control mb-3"  placeholder="Autor" v-model="autor">
+                       <input type="text" class="form-control mb-3"  placeholder="Editora" v-model="editora"/>
+                       <input type="number" class="form-control mb-3"  placeholder="Ano" v-model="ano"/>
+                    <div v-if="verificarCampos()">
+                        <button @click="salvar()" class="btn btn-primary mb-3">Salvar</button>
+                    </div>
+                    <div v-else>
+                        <button class="btn btn-primary mb-3" disabled>Salvar</button>
+                    </div>
+                    <button class="btn btn-info" @click="carregarHora()">Hora</button>
+                    <p>{{ hora }}</p>
+               </div>
+               <div class="col-md-8">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Editora</th>
+                            <th>Ano</th>
+                            <th>Alterar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(livro, index) in listaLivros">
+                            <td>{{ livro.titulo }}</td>
+                            <td>{{ livro.autor }}</td>
+                            <td>{{ livro.editora }}</td>
+                            <td>{{ livro.ano }}</td>
+                            <td>
+                                <button class="btn btn-warning" @click="alterar(index)">Alterar</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" @click="excluir(index)">Excluir</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+           </div> 
+           </main>
+           <footer>
+               <p>Progamação de Scripts</p>
+           </footer>
+       </div>
+       <script type="text/javascript">
+           class Livro {
+               constructor(titulo, autor, editora, ano) {
+                   this.titulo = titulo;
+                   this.autor = autor;
+                   this.editora = editora;
+                   this.ano = ano;
+               }
+           }
+
+           var app = new Vue({
+            el: '#app',
+            data: {
+                titulo: '',
+                autor: '',
+                editora: '',
+                ano: '',
+                listaLivros:[],
+                hora: '00:00:00',
+                posicao: -1
+            },
+            methods: {
+                verificarCampos: function() {
+                    return (this.titulo != '' && this.autor != '' && this.editora != '' && this.ano != '');
+                },
+                salvar: function() {
+                    let novoLivro = new Livro(this.titulo, this.autor, this.editora, this.ano);
+                    if (this.posicao == -1) {
+                        this.listaLivros.push(novoLivro);
+                    }
+                    else {
+                        Vue.set(this.listaLivros, this.posicao, novoLivro);
+                        this.posicao = -1;
+                    }
+                    this.titulo = '';
+                    this.autor = '';
+                    this.editora = '';
+                    this.ano = '';
+                    this.posicao = -1;
+                },
+                carregarHora: function() {
+                    axios.get('http://date.jsontest.com/').then (res => (this.hora = res.data.time));
+                },
+                alterar: function (index){
+                    this.titulo = this.listaLivros[index].titulo;
+                    this.autor = this.listaLivros[index].autor;
+                    this.editora = this.listaLivros[index].editora;
+                    this.ano = this.listaLivros[index].ano;
+                    this.posicao = index;
+                },
+                excluir: function (index){
+                    if (confirm('Deseja excluir?')) {
+                        this.listaLivros.splice(index, 1);
+                    }
+                }
+            }
+        });
+       </script>
+</body>
+</html>

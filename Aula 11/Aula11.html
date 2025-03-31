@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Utilizando Vue.js</title>
+    <script type="text/javascript" src="vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        
+        <input type="text" placeholder="Tarefa" v-model="tarefa" @keypress.enter="adicionar"/>
+
+        <button @click="adicionar()">Adicionar Tarefa</button>
+        <button @click="limpar()">Limpar</button>
+        
+        <table border="1">
+            <tr v-for="(item,index) in listaTarefas">
+                <td>{{ index }}</td>
+                <td>{{ item }}</td>
+            </tr>
+        
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue ({
+            el: "#app",
+            data: {
+                tarefa: "",
+                listaTarefas: []
+            },
+            methods: {
+                adicionar: function (){
+                    this.listaTarefas.push(this.tarefa);
+                    this.tarefa = "";
+                },
+                limpar: function() {
+                this.listaTarefas = [];
+                }
+            }
+        });
+    </script>
+</body>
+</html>
