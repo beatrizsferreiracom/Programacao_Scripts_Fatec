@@ -1,0 +1,113 @@
+body {
+    font-family: century gothic, sans-serif;
+    background-color: #ffe4e1;
+    color: #5c3c3c;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    background-color: #fff0f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+header img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #852947;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 100;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    margin-left: 240px;
+    border-radius: 5px;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #d8bfd8 !important;
+    background-color: #dc90aa  !important;
+    color: #ffffff !important;
+}
+
+#btn-salvar {
+    display: inline-block;
+    margin: 10px auto;
+    margin-left: 350px;
+    border-radius: 5px;
+    width: 50%;
+    background-color: #852947 !important;
+    border: none !important;
+    color: white !important;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btn-salvar:hover {
+    background-color: #db7093 !important;
+}
+
+#btn-alterar{
+    background-color: #852947 !important;
+    border: none !important;
+    color: white !important;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.table-container {
+    width: 120%;
+    max-height: 300px;
+    margin-left: 200px;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: none;
+}
+
+.table {
+    display: block;
+    table-layout: auto;
+    width: 100%;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.table th, .table td {
+    border: 1px solid #efbcce;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: normal;
+}
+
+.table th {
+    background-color: #852947 !important;;
+}
+
+.table td {
+    background-color: #fff0f5;
+    color: #852947 !important
+}
+
+
+
+
